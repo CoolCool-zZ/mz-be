@@ -6,6 +6,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.22'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.9.22'
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.9.22'
+    id 'com.diffplug.spotless' version '6.24.0'
 }
 
 group = 'coolcool'
@@ -47,4 +48,13 @@ tasks.withType(KotlinCompile) {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+spotless {
+    java {
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat().aosp()
+        formatAnnotations()
+    }
 }
