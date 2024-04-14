@@ -17,4 +17,5 @@ mysql -u root -p
 ```
 
 ## TO-DO
-swagger 추가
+- swagger 추가
+- jpa 관련 공부 후 entity, dto 폴더 구조 다시 정리하기
