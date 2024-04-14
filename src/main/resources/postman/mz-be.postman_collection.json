@@ -1,0 +1,60 @@
+{
+    "item": [{
+        "item": [{
+            "item": [
+                {
+                    "item": [{
+                        "request": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                                "path": [
+                                    "mz",
+                                    "user",
+                                    "1"
+                                ],
+                                "protocol": "http",
+                                "port": "8525",
+                                "host": ["localhost"],
+                                "raw": "http://localhost:8525/mz/user/1"
+                            }
+                        },
+                        "response": [],
+                        "name": "사용자 상세 조회 시, 정상 응답"
+                    }],
+                    "name": "Positive"
+                },
+                {
+                    "item": [{
+                        "request": {
+                            "method": "GET",
+                            "header": [],
+                            "url": {
+                                "path": [
+                                    "mz",
+                                    "user",
+                                    "-1"
+                                ],
+                                "protocol": "http",
+                                "port": "8525",
+                                "host": ["localhost"],
+                                "raw": "http://localhost:8525/mz/user/-1"
+                            }
+                        },
+                        "response": [],
+                        "name": "userId가 0 또는 음수인 경우, 에러 응답"
+                    }],
+                    "name": "Negative"
+                }
+            ],
+            "name": "[GET] /user/{userId}"
+        }],
+        "name": "User"
+    }],
+    "info": {
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "name": "mz-be",
+        "_exporter_id": "34265323",
+        "_postman_id": "4d4a93e2-8f36-4aa5-9189-e2ce266233bb"
+    }
+}
