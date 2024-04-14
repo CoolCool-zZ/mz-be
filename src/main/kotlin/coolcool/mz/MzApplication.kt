@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class MzApplication
 
 fun main(args: Array<String>) {
-	runApplication<MzApplication>(*args)
+    runApplication<MzApplication>(*args)
 }
