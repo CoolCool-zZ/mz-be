@@ -1,56 +1,442 @@
 {
-    "item": [{
-        "item": [{
+    "item": [
+        {
+            "item": [{
+                "item": [
+                    {
+                        "item": [{
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "path": [
+                                        "mz",
+                                        "user",
+                                        "1"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "8525",
+                                    "host": ["localhost"],
+                                    "raw": "http://localhost:8525/mz/user/1"
+                                }
+                            },
+                            "response": [],
+                            "name": "사용자 상세 조회 시, 정상 응답"
+                        }],
+                        "name": "Positive"
+                    },
+                    {
+                        "item": [{
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "path": [
+                                        "mz",
+                                        "user",
+                                        "-1"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "8525",
+                                    "host": ["localhost"],
+                                    "raw": "http://localhost:8525/mz/user/-1"
+                                }
+                            },
+                            "response": [],
+                            "name": "userId가 0 또는 음수인 경우, 에러 응답"
+                        }],
+                        "name": "Negative"
+                    }
+                ],
+                "name": "[GET] /user/{userId}"
+            }],
+            "name": "user"
+        },
+        {
             "item": [
                 {
-                    "item": [{
-                        "request": {
-                            "method": "GET",
-                            "header": [],
-                            "url": {
-                                "path": [
-                                    "mz",
-                                    "user",
-                                    "1"
-                                ],
-                                "protocol": "http",
-                                "port": "8525",
-                                "host": ["localhost"],
-                                "raw": "http://localhost:8525/mz/user/1"
-                            }
+                    "item": [
+                        {
+                            "item": [{
+                                "request": {
+                                    "method": "POST",
+                                    "header": [],
+                                    "body": {
+                                        "mode": "raw",
+                                        "options": {"raw": {"language": "json"}},
+                                        "raw": "{\n    \"mzlistName\": \"아직 가보지 않은 맛집리스트\",\n    \"mzlistDescription\" : \"맛집리스트 등록 테스트\"\n}"
+                                    },
+                                    "url": {
+                                        "path": [
+                                            "mz",
+                                            "mzlist"
+                                        ],
+                                        "protocol": "http",
+                                        "port": "8525",
+                                        "host": ["localhost"],
+                                        "raw": "http://localhost:8525/mz/mzlist"
+                                    }
+                                },
+                                "response": [],
+                                "name": "맛집 리스트 생성 시 정상 응답 확인"
+                            }],
+                            "name": "Positive"
                         },
-                        "response": [],
-                        "name": "사용자 상세 조회 시, 정상 응답"
-                    }],
-                    "name": "Positive"
+                        {
+                            "item": [
+                                {
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [],
+                                        "body": {
+                                            "mode": "raw",
+                                            "options": {"raw": {"language": "json"}},
+                                            "raw": "{\n    // \"mzlistName\": \"아직 가보지 않은 맛집리스트\",\n    \"mzlistDescription\" : \"맛집리스트 등록 테스트\"\n}"
+                                        },
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "mzlistName이 없는 경우, 에러 응답 확인"
+                                },
+                                {
+                                    "request": {
+                                        "method": "POST",
+                                        "header": [],
+                                        "body": {
+                                            "mode": "raw",
+                                            "options": {"raw": {"language": "json"}},
+                                            "raw": "{\n    \"mzlistName\": \"12345678901234567890123456789012345678901234567890\",\n    \"mzlistDescription\" : \"맛집리스트 등록 테스트\"\n}"
+                                        },
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "mzlistName이 40자 넘는 경우, 에러 응답 확인"
+                                }
+                            ],
+                            "name": "Negative"
+                        }
+                    ],
+                    "name": "[POST] /mzlist"
+                },
+                {
+                    "item": [
+                        {
+                            "item": [{
+                                "request": {
+                                    "method": "PUT",
+                                    "header": [],
+                                    "body": {
+                                        "mode": "raw",
+                                        "options": {"raw": {"language": "json"}},
+                                        "raw": "{\n    \"mzlistOwnerId\": 4,\n    \"mzlistName\": \"쿨쿨이의 맛집리스트\",\n    \"mzlistDescription\" : \"맛집리스트 수정 테스트\"\n}"
+                                    },
+                                    "url": {
+                                        "path": [
+                                            "mz",
+                                            "mzlist",
+                                            "1"
+                                        ],
+                                        "protocol": "http",
+                                        "port": "8525",
+                                        "host": ["localhost"],
+                                        "raw": "http://localhost:8525/mz/mzlist/1"
+                                    }
+                                },
+                                "response": [],
+                                "name": "맛집 리스트 수정 시 정상 응답 확인"
+                            }],
+                            "name": "Positive"
+                        },
+                        {
+                            "item": [
+                                {
+                                    "request": {
+                                        "method": "PUT",
+                                        "header": [],
+                                        "body": {
+                                            "mode": "raw",
+                                            "options": {"raw": {"language": "json"}},
+                                            "raw": "{\n    \"mzlistOwnerId\": 3,\n    \"mzlistName\": \"클로이의 인도네시아 맛집리스트\",\n    \"mzlistDescription\" : \"맛집리스트 수정 실패 테스트\"\n}"
+                                        },
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist",
+                                                "-1"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist/-1"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "mzlistId가 양수가 아닌 경우, 에러 응답 확인"
+                                },
+                                {
+                                    "request": {
+                                        "method": "PUT",
+                                        "header": [],
+                                        "body": {
+                                            "mode": "raw",
+                                            "options": {"raw": {"language": "json"}},
+                                            "raw": "{\n    \"mzlistOwnerId\": -4,\n    \"mzlistName\": \"쿨쿨이의 맛집리스트\",\n    \"mzlistDescription\" : \"맛집리스트 수정 테스트\"\n}"
+                                        },
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist",
+                                                "1"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist/1"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "mzlistOwnerId가 양수가 아닌 경우, 에러 응답 확인"
+                                },
+                                {
+                                    "request": {
+                                        "method": "PUT",
+                                        "header": [],
+                                        "body": {
+                                            "mode": "raw",
+                                            "options": {"raw": {"language": "json"}},
+                                            "raw": "{\n    \"mzlistOwnerId\": 3,\n    \"mzlistName\": \"클로이의 인도네시아 맛집리스트\",\n    \"mzlistDescription\" : \"맛집리스트 수정 실패 테스트\"\n}"
+                                        },
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist",
+                                                "2"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist/2"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "본인이 소유하지 않은 맛집리스트 수정 시, 에러 응답 확인"
+                                }
+                            ],
+                            "name": "Negative"
+                        }
+                    ],
+                    "name": "[PUT] /mzlist/{mzlistId}"
+                },
+                {
+                    "item": [
+                        {
+                            "item": [{
+                                "request": {
+                                    "method": "DELETE",
+                                    "header": [],
+                                    "url": {
+                                        "path": [
+                                            "mz",
+                                            "mzlist",
+                                            "3"
+                                        ],
+                                        "protocol": "http",
+                                        "port": "8525",
+                                        "host": ["localhost"],
+                                        "raw": "http://localhost:8525/mz/mzlist/3"
+                                    }
+                                },
+                                "response": [],
+                                "name": "맛집리스트 삭제 시, 정상 응답 확인"
+                            }],
+                            "name": "Positive"
+                        },
+                        {
+                            "item": [
+                                {
+                                    "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist",
+                                                "-1"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist/-1"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "mzlistId가 양수가 아닌 경우, 에러 응답 확인"
+                                },
+                                {
+                                    "request": {
+                                        "method": "DELETE",
+                                        "header": [],
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist",
+                                                "2"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist/2"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "사용자가 소유하지 않은 맛집리스트를 삭제하려는 경우, 에러 응답 확인"
+                                }
+                            ],
+                            "name": "Negative"
+                        }
+                    ],
+                    "name": "[DELETE] /mzlist/{mzlistId}"
+                },
+                {
+                    "item": [
+                        {
+                            "item": [{
+                                "request": {
+                                    "method": "GET",
+                                    "header": [],
+                                    "url": {
+                                        "path": [
+                                            "mz",
+                                            "mzlist",
+                                            "owned",
+                                            "1"
+                                        ],
+                                        "protocol": "http",
+                                        "port": "8525",
+                                        "host": ["localhost"],
+                                        "raw": "http://localhost:8525/mz/mzlist/owned/1"
+                                    }
+                                },
+                                "response": [],
+                                "name": "본인이 소유한 맛집리스트 상세 조회 시, 정상 응답"
+                            }],
+                            "name": "Positive"
+                        },
+                        {
+                            "item": [
+                                {
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [],
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist",
+                                                "owned",
+                                                "-1"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist/owned/-1"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "맛집리스트 ID가 음수인 경우, 에러 응답 확인"
+                                },
+                                {
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [],
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist",
+                                                "owned",
+                                                "100000"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist/owned/100000"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "맛집리스트 ID에 대응되는 데이터가 없는 경우, 에러 응답 확인"
+                                },
+                                {
+                                    "request": {
+                                        "method": "GET",
+                                        "header": [],
+                                        "url": {
+                                            "path": [
+                                                "mz",
+                                                "mzlist",
+                                                "owned",
+                                                "2"
+                                            ],
+                                            "protocol": "http",
+                                            "port": "8525",
+                                            "host": ["localhost"],
+                                            "raw": "http://localhost:8525/mz/mzlist/owned/2"
+                                        }
+                                    },
+                                    "response": [],
+                                    "name": "본인이 소유한 맛집리스트가 아닌 경우 에러 응답 확인"
+                                }
+                            ],
+                            "name": "Negative"
+                        }
+                    ],
+                    "name": "[GET] /mzlist/owned/{mzlistId}"
                 },
                 {
                     "item": [{
-                        "request": {
-                            "method": "GET",
-                            "header": [],
-                            "url": {
-                                "path": [
-                                    "mz",
-                                    "user",
-                                    "-1"
-                                ],
-                                "protocol": "http",
-                                "port": "8525",
-                                "host": ["localhost"],
-                                "raw": "http://localhost:8525/mz/user/-1"
-                            }
-                        },
-                        "response": [],
-                        "name": "userId가 0 또는 음수인 경우, 에러 응답"
+                        "item": [{
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "path": [
+                                        "mz",
+                                        "mzlist",
+                                        "owned"
+                                    ],
+                                    "protocol": "http",
+                                    "port": "8525",
+                                    "host": ["localhost"],
+                                    "raw": "http://localhost:8525/mz/mzlist/owned"
+                                }
+                            },
+                            "response": [],
+                            "name": "본인이 소유한 맛집리스트 목록 조회 시, 정상 응답"
+                        }],
+                        "name": "Positive"
                     }],
-                    "name": "Negative"
+                    "name": "[GET] /mzlist/owned"
                 }
             ],
-            "name": "[GET] /user/{userId}"
-        }],
-        "name": "User"
-    }],
+            "name": "mzlist"
+        }
+    ],
     "info": {
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         "name": "mz-be",

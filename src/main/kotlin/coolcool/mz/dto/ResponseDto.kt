@@ -2,7 +2,7 @@ package coolcool.mz.dto
 
 class ResponseDto<T> private constructor(
     val status: ResponseStatus,
-    val data: T,
+    val data: T?,
 ) {
     enum class ResponseStatus {
         SUCCESS,
@@ -13,6 +13,10 @@ class ResponseDto<T> private constructor(
     companion object {
         fun <T> ofSuccess(data: T): ResponseDto<T> {
             return ResponseDto(status = ResponseStatus.SUCCESS, data = data)
+        }
+
+        fun ofSuccessWithoutData(): ResponseDto<*> {
+            return ResponseDto(status = ResponseStatus.SUCCESS, data = null)
         }
 
         fun ofFail(data: String): ResponseDto<String> {
