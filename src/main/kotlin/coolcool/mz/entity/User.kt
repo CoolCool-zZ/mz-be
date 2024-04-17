@@ -4,6 +4,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "tb_user")
@@ -17,19 +18,8 @@ class User(
     val gender: String,
     val authorityCode: String,
     val useYn: String,
-) {
-    companion object {
-        fun getSystemUser(): User {
-            return User(
-                userId = -1,
-                name = "SYSTEM",
-                nickname = null,
-                password = "",
-                birthday = LocalDate.MAX,
-                gender = "",
-                authorityCode = "",
-                useYn = "",
-            )
-        }
-    }
-}
+    val createDate: LocalDateTime,
+    val createUser: Long,
+    val updateDate: LocalDateTime,
+    val updateUser: Long,
+)

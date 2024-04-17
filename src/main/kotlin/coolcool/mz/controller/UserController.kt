@@ -1,6 +1,7 @@
 package coolcool.mz.controller
 
-import coolcool.mz.entity.User
+import coolcool.mz.dto.ResponseDto
+import coolcool.mz.dto.user.UserDetailRes
 import coolcool.mz.service.UserService
 import jakarta.validation.constraints.Positive
 import org.springframework.validation.annotation.Validated
@@ -16,7 +17,7 @@ class UserController(
     @GetMapping("/user/{userId}")
     fun getUserDetail(
         @PathVariable(name = "userId") @Positive(message = "userId should be positive") userId: Long,
-    ): User {
-        return userService.getUserDetail(userId)
+    ): ResponseDto<UserDetailRes> {
+        return ResponseDto.ofSuccess(userService.getUserDetail(userId))
     }
 }
