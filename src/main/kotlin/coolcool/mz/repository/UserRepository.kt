@@ -1,6 +1,6 @@
 package coolcool.mz.repository
 
-import coolcool.mz.model.user.User
+import coolcool.mz.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

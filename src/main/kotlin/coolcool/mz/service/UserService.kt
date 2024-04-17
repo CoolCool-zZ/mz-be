@@ -1,6 +1,6 @@
 package coolcool.mz.service
 
-import coolcool.mz.model.user.User
+import coolcool.mz.entity.User
 import coolcool.mz.repository.UserRepository
 import org.springframework.stereotype.Service
 

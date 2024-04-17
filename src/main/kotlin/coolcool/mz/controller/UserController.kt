@@ -1,6 +1,6 @@
 package coolcool.mz.controller
 
-import coolcool.mz.model.user.User
+import coolcool.mz.entity.User
 import coolcool.mz.service.UserService
 import jakarta.validation.constraints.Positive
 import org.springframework.validation.annotation.Validated
