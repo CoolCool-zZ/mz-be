@@ -13,7 +13,7 @@ class SwaggerConfig {
         return OpenAPI().components(Components()).info(apiInfo())
     }
 
-    fun apiInfo(): Info {
+    private fun apiInfo(): Info {
         return Info().title("MZ").description("mz backend").version("1.0.0")
     }
 }
