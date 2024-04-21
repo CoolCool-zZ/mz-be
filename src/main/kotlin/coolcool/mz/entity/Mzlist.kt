@@ -17,11 +17,11 @@ class Mzlist(
     val mzlistName: String,
     val mzlistDescription: String?,
     val mzlistIcon: String?,
-    val createDate: LocalDateTime,
-    val createUser: Long,
-    val updateDate: LocalDateTime,
-    val updateUser: Long,
-) {
+    createDate: LocalDateTime,
+    createUser: Long,
+    updateDate: LocalDateTime,
+    updateUser: Long,
+) : BaseEntity(createDate, createUser, updateDate, updateUser) {
     companion object {
         fun ofCreate(userId: Long, mzlistDetailReq: MzlistDetailReq): Mzlist {
             val now = LocalDateTime.now()

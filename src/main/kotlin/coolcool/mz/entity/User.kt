@@ -1,6 +1,8 @@
 package coolcool.mz.entity
 
 import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import java.time.LocalDate
@@ -9,7 +11,7 @@ import java.time.LocalDateTime
 @Entity
 @Table(name = "tb_user")
 class User(
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val userId: Long,
     val name: String,
     val nickname: String?,
@@ -18,8 +20,8 @@ class User(
     val gender: String,
     val authorityCode: String,
     val useYn: String,
-    val createDate: LocalDateTime,
-    val createUser: Long,
-    val updateDate: LocalDateTime,
-    val updateUser: Long,
-)
+    createDate: LocalDateTime,
+    createUser: Long,
+    updateDate: LocalDateTime,
+    updateUser: Long,
+) : BaseEntity(createDate, createUser, updateDate, updateUser)
