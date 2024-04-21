@@ -11,6 +11,23 @@ class MzlistService(
     private val mzlistRepository: MzlistRepository,
     private val sessionService: SessionService,
 ) {
+    private fun getMzlistDetailOrThrowIfNotExist(mzlistId: Long): Mzlist {
+        val mzlist = mzlistRepository.findById(mzlistId).orElseThrow { throw IllegalArgumentException("mzlistId $mzlistId not exist") }
+
+        return mzlist
+    }
+
+    private fun getMyOwnedMzlistDetailOrThrowIfNotOwned(mzlistId: Long): Mzlist {
+        val userId = sessionService.getUserIdFromSession()
+        val mzlist = getMzlistDetailOrThrowIfNotExist(mzlistId)
+
+        if (userId != mzlist.mzlistOwnerId) {
+            throw IllegalArgumentException("user does not owned mzlist with mzlistId $mzlistId")
+        }
+
+        return mzlist
+    }
+
     fun createMzlist(mzlistDetailReq: MzlistDetailReq): Long {
         val userId = sessionService.getUserIdFromSession()
 
@@ -23,9 +40,9 @@ class MzlistService(
             throw IllegalArgumentException("only update owned mzlist")
         }
 
-        getMyOwnedMzlistDetailOrThrowIfNotOwned(mzlistId)
+        val mzlist = getMyOwnedMzlistDetailOrThrowIfNotOwned(mzlistId)
 
-        return mzlistRepository.save(Mzlist.ofUpdate(mzlistId, userId, mzlistDetailReq)).mzlistId
+        return mzlistRepository.save(Mzlist.ofUpdate(mzlistId, userId, mzlist, mzlistDetailReq)).mzlistId
     }
 
     fun deleteMzlist(mzlistId: Long) {
@@ -34,28 +51,14 @@ class MzlistService(
         mzlistRepository.deleteById(mzlistId)
     }
 
-    private fun getMzlistDetailOrThrowIfNotExist(mzlistId: Long): MzlistDetailRes {
-        val mzlist = mzlistRepository.findById(mzlistId).orElseThrow { throw IllegalArgumentException("mzlistId $mzlistId not exist") }
-
-        return MzlistDetailRes.from(mzlist)
-    }
-
-    fun getMyOwnedMzlistDetailOrThrowIfNotOwned(mzlistId: Long): MzlistDetailRes {
-        val userId = sessionService.getUserIdFromSession()
-        val mzlistDetailRes = getMzlistDetailOrThrowIfNotExist(mzlistId)
-
-        if (userId != mzlistDetailRes.mzlistOwnerId) {
-            throw IllegalArgumentException("user does not owned mzlist with mzlistId $mzlistId")
-        }
-
-        return mzlistDetailRes
+    fun getMyOwnedMzlistDetail(mzlistId: Long): MzlistDetailRes {
+        return MzlistDetailRes.from(getMyOwnedMzlistDetailOrThrowIfNotOwned(mzlistId))
     }
 
     fun getMyOwnedMzlistList(): List<MzlistDetailRes> {
         val userId = sessionService.getUserIdFromSession()
 
-        return mzlistRepository.findMzlistByMzlistOwnerId(userId).stream()
+        return mzlistRepository.findMzlistByMzlistOwnerId(userId)
             .map(MzlistDetailRes::from)
-            .toList()
     }
 }

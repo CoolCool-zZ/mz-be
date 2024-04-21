@@ -67,6 +67,6 @@ class MzlistController(
     fun getMyOwnedMzlistDetail(
         @PathVariable("mzlistId") @Positive(message = "mzlistId should be positive") mzlistId: Long,
     ): ResponseDto<MzlistDetailRes> {
-        return ResponseDto.ofSuccess(mzlistService.getMyOwnedMzlistDetailOrThrowIfNotOwned(mzlistId))
+        return ResponseDto.ofSuccess(mzlistService.getMyOwnedMzlistDetail(mzlistId))
     }
 }

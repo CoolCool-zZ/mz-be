@@ -39,7 +39,7 @@ class Mzlist(
             )
         }
 
-        fun ofUpdate(mzlistId: Long, userId: Long, mzlistDetailReq: MzlistDetailReq): Mzlist {
+        fun ofUpdate(mzlistId: Long, userId: Long, mzlist: Mzlist, mzlistDetailReq: MzlistDetailReq): Mzlist {
             val now = LocalDateTime.now()
 
             return Mzlist(
@@ -48,8 +48,8 @@ class Mzlist(
                 mzlistName = mzlistDetailReq.mzlistName,
                 mzlistDescription = mzlistDetailReq.mzlistDescription,
                 mzlistIcon = mzlistDetailReq.mzlistIcon,
-                createDate = now,
-                createUser = userId,
+                createDate = mzlist.createDate,
+                createUser = mzlist.createUser,
                 updateDate = now,
                 updateUser = userId,
             )

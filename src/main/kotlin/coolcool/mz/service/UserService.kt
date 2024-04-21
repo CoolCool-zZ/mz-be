@@ -12,7 +12,7 @@ class UserService(
 ) {
     fun getUserDetail(userId: Long): UserDetailRes {
         val userDetailRes = UserDetailRes.from(userRepository.findByUserId(userId) ?: throw IllegalArgumentException("userId $userId does not exist"))
-        if (YesNo.NO.name == userDetailRes.useYn) {
+        if (YesNo.NO.code == userDetailRes.useYn) {
             throw IllegalArgumentException("userId $userId does not exist")
         }
 
