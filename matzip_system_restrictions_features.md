@@ -127,19 +127,19 @@
 
 #### 제약사항
 - **변경 유형 제한**: 다음 세 가지 값만 허용
-  - `INFO_UPDATED`: 정보 업데이트
-  - `OWNERSHIP_TRANSFERRED`: 소유권 이전
-  - `LIST_CREATED`: 리스트 생성
+    - `INFO_UPDATED`: 정보 업데이트
+    - `OWNERSHIP_TRANSFERRED`: 소유권 이전
+    - `LIST_CREATED`: 리스트 생성
 - **이력 불변성**: 생성된 이력은 수정 불가
 - **소유권 이전 추적**: 소유권 이전 시 이전자 정보 필수
 
 ### MatZipListShare (맛집 리스트 공유) 도메인
 
 #### 제공 기능
-- **세분화된 권한 제어**: 
-  - 리스트 정보 편집 권한 (`canEditListInfo`)
-  - 리스트 항목 편집 권한 (`canEditListItems`)
-  - 공유 사용자 편집 권한 (`canEditSharedUsers`)
+- **세분화된 권한 제어**:
+    - 리스트 정보 편집 권한 (`canEditListInfo`)
+    - 리스트 항목 편집 권한 (`canEditListItems`)
+    - 공유 사용자 편집 권한 (`canEditSharedUsers`)
 - **다중 사용자 공유**: 여러 사용자와 동시 공유 가능
 - **공유 이력 추적**: 언제 누가 공유했는지 기록
 - **양방향 관계**: 공유자-피공유자 관계 명확히 구분

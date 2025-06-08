@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
 	id("org.springframework.boot") version "3.2.4"
 	id("io.spring.dependency-management") version "1.1.4"
@@ -38,13 +36,6 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs += "-Xjsr305=strict"
-		jvmTarget = "21"
-	}
-}
-
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
@@ -70,7 +61,7 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
 	format("misc") {
 		target("*.gradle", "*.md", ".gitignore")
 		trimTrailingWhitespace()
-		indentWithTabs()
+		indentWithSpaces(4)
 		endWithNewline()
 	}
 
