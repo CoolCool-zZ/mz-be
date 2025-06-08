@@ -1,20 +1,61 @@
-version: "3.8"
+# 개발 환경용 Docker Compose
+version: '3.8'
 
 services:
-  mysql:
-    image: mysql:8.0.33
-    container_name: coolcool-mysql
-    restart: always
-    command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_bin
+  # 개발 환경에서만 사용하는 MySQL
+  mysql-dev:
+    image: mysql:8.0
+    container_name: matzip-mysql-dev
+    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: coolcool
-      MYSQL_DATABASE: mz
-      TZ: Asia/Seoul
+      MYSQL_ROOT_PASSWORD: dev_root_password
+      MYSQL_DATABASE: matzip_dev
+      MYSQL_USER: matzip_dev_user
+      MYSQL_PASSWORD: dev_password
     ports:
       - "3306:3306"
+    volumes:
+      - mysql_dev_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    profiles:
+      - dev
+      - full
+
+  # 개발 환경에서만 사용하는 Redis
+  redis-dev:
+    image: redis:7-alpine
+    container_name: matzip-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_dev_data:/data
+    command: redis-server --appendonly yes
+    profiles:
+      - dev
+      - full
+
+  # 개발용 Redis GUI (선택사항)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: matzip-redis-gui
+    restart: unless-stopped
+    environment:
+      REDIS_HOSTS: local:redis-dev:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis-dev
+    profiles:
+      - dev
+      - full
+
+volumes:
+  mysql_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
 
 networks:
   default:
-    name: coolcool
+    name: matzip-network
