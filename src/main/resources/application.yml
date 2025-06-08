@@ -2,14 +2,14 @@ spring:
   profiles:
     active: dev
 
-  # ?? ??
+  # common setting
   jpa:
     hibernate:
       ddl-auto: validate
     show-sql: false
 
 ---
-# ?? ??
+# DEV
 spring:
   config:
     activate:
@@ -32,7 +32,7 @@ spring:
       ddl-auto: update
 
 ---
-# ?? ??
+# PROD
 spring:
   config:
     activate:
