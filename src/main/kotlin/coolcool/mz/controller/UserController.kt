@@ -1,7 +1,7 @@
 package coolcool.mz.controller
 
 import coolcool.mz.dto.ResponseDto
-import coolcool.mz.dto.user.UserDetailRes
+import coolcool.mz.entity.User
 import coolcool.mz.service.UserService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -21,7 +21,7 @@ class UserController(
     @GetMapping("/user/{userId}")
     fun getUserDetail(
         @PathVariable(name = "userId") @Positive(message = "userId should be positive") userId: Long,
-    ): ResponseDto<UserDetailRes> {
+    ): ResponseDto<User> {
         return ResponseDto.ofSuccess(userService.getUserDetail(userId))
     }
 }
