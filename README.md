@@ -3,7 +3,7 @@
 src/main/resources/postman 하위에 있는 postman script로 테스트 가능
 
 ## swagger
-http://localhost:8525/mz/swagger-ui/index.html
+http://localhost:8080/swagger-ui/index.html
 
 # Docker
 ## MySQL만 실행
