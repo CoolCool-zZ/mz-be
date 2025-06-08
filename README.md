@@ -28,8 +28,8 @@ docker-compose down
 
 ## 서버 접속
 ```bash
-docker exec -it coolcool-mysql bash
-mysql -u root -p
+docker exec -it matzip-mysql-dev bash
+mysql -u matzip_dev_user -p
 ```
 
 # Spring Boot 애플리케이션 실행
